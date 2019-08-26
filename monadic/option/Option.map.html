@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8"/>
+		<title>Function Option.map</title>
+		<link rel="stylesheet" type="text/css" href="../../styles/ddox.css"/>
+		<link rel="stylesheet" href="../../prettify/prettify.css" type="text/css"/>
+		<script type="text/javascript" src="../../scripts/jquery.js">/**/</script><script type="text/javascript" src="../../scripts/ddox.js">/**/</script>
+	</head>
+	<body onload="setupDdox();">
+		<nav id="main-nav">
+			<noscript>
+				<p style="color: red">The search functionality needs JavaScript enabled</p>
+			</noscript>
+			<div id="symbolSearchPane" style="display: none">
+				<form action="#" method="GET">
+					<input id="symbolSearch" type="text" name="q" placeholder="Search for symbols" autocomplete="off" onchange="performSymbolSearch(40);" onkeypress="this.onchange();" onpaste="this.onchange();" oninput="this.onchange();"/>
+				</form>
+				<ul id="symbolSearchResults" class="symbolList" style="display: none"></ul><script type="application/javascript" src="../../symbols.js"></script><script type="application/javascript">var symbolSearchRootDir = "../../";
+$('#symbolSearchPane').show();</script>
+			</div>
+			<ul class="tree-view">
+				<li class="tree-view ">
+					<div class="package ">monadic
+					</div>
+			<ul class="tree-view">
+				<li>
+					<div class="module ">
+						<a href="../../monadic/json.html">json</a>
+					</div>
+				</li>
+				<li>
+					<div class="module selected">
+						<a href="../../monadic/option.html">option</a>
+					</div>
+				</li>
+			</ul>
+				</li>
+			</ul>
+		</nav>
+		<div id="main-contents">
+			<h1>Function Option.map</h1><p>Calls fun on value of Some or returns self if called on None.
+ This is used to create chains of transformations, which might be stopped at any point
+ when None is returned.
+</p>
+			<div class="prototype">
+				<code class="lang-d">
+					<div class="single-prototype">
+			<a href="../../monadic/option/Option.html"><span class="typ">Option</span></a> <span class="pln">map</span>(alias fun)<span class="pun">(</span><span class="pun">)</span><span class="pun">;</span>
+					</div>
+				</code>
+			</div>
+			
+			<section><h2>Returns</h2>
+<p>Option
+</p>
+</section>
+<section><h2>Example</h2>
+<p>map on Some
+</p>
+<pre class="code"><code class="lang-d"><span class="kwd">auto </span><span class="pln">some </span><span class="pun">= <a href="../../monadic/option/Some.html"></span><span class="typ">Some</span></a><span class="pun">(</span><span class="lit">4</span><span class="pun">);
+</span><span class="kwd">auto </span><span class="pln">doubleMe </span><span class="pun">= (</span><span class="typ">int </span><span class="pln">x</span><span class="pun">) =&gt; </span><span class="pln">x </span><span class="pun">* </span><span class="lit">2</span><span class="pun">;
+</span><span class="kwd">auto </span><span class="pln">result </span><span class="pun">= </span><span class="pln">some<wbr/></span><span class="pun">.</span><span class="pln">map</span><span class="pun">!</span><span class="pln">doubleMe</span><span class="pun">;
+</span><span class="kwd">assert</span><span class="pun">(!</span><span class="pln">result<wbr/></span><span class="pun">.</span><span class="pln">isNone</span><span class="pun">());
+</span><span class="kwd">assert</span><span class="pun">(</span><span class="pln">result<wbr/></span><span class="pun">.</span><span class="pln">unwrap</span><span class="pun">!</span><span class="typ">int</span><span class="pun">() == </span><span class="lit">8</span><span class="pun">);
+
+</span></code></pre>
+</section>
+<section><h2>Example</h2>
+<p>map with lambda
+</p>
+<pre class="code"><code class="lang-d"><span class="kwd">auto </span><span class="pln">some </span><span class="pun">= <a href="../../monadic/option/Some.html"></span><span class="typ">Some</span></a><span class="pun">(</span><span class="lit">4</span><span class="pun">);
+</span><span class="kwd">auto </span><span class="pln">result </span><span class="pun">= </span><span class="pln">some<wbr/></span><span class="pun">.</span><span class="pln">map</span><span class="pun">!((</span><span class="typ">int </span><span class="pln">a</span><span class="pun">) =&gt; </span><span class="pln">a </span><span class="pun">* </span><span class="lit">3</span><span class="pun">);
+</span><span class="kwd">assert</span><span class="pun">(!</span><span class="pln">result<wbr/></span><span class="pun">.</span><span class="pln">isNone</span><span class="pun">());
+</span><span class="kwd">assert</span><span class="pun">(</span><span class="pln">result<wbr/></span><span class="pun">.</span><span class="pln">unwrap</span><span class="pun">!</span><span class="typ">int</span><span class="pun">() == </span><span class="lit">12</span><span class="pun">);
+
+</span></code></pre>
+</section>
+<section><h2>Example</h2>
+<p>map on None
+</p>
+<pre class="code"><code class="lang-d"><span class="kwd">auto </span><span class="pln">none </span><span class="pun">= <a href="../../monadic/option/None.html"></span><span class="typ">None</span></a><span class="pun">();
+</span><span class="kwd">auto </span><span class="pln">doubleMe </span><span class="pun">= (</span><span class="typ">int </span><span class="pln">x</span><span class="pun">) =&gt; </span><span class="pln">x </span><span class="pun">* </span><span class="lit">2</span><span class="pun">;
+</span><span class="kwd">auto </span><span class="pln">result </span><span class="pun">= </span><span class="pln">none<wbr/></span><span class="pun">.</span><span class="pln">map</span><span class="pun">!</span><span class="pln">doubleMe</span><span class="pun">;
+</span><span class="kwd">assert</span><span class="pun">(</span><span class="pln">result<wbr/></span><span class="pun">.</span><span class="pln">isNone</span><span class="pun">());
+
+</span></code></pre>
+</section>
+
+			<footer>
+				<table class="license-info">
+					<tr>
+						<th>Authors</th>
+						<td>
+							
+						</td>
+					</tr>
+					<tr>
+						<th>Copyright</th>
+						<td>
+							
+						</td>
+					</tr>
+					<tr>
+						<th>License</th>
+						<td>
+							
+						</td>
+					</tr>
+				</table>
+				<p class="faint">Generated using the DDOX documentation generator</p>
+			</footer>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8"/>
+		<title>Function Option.unwrap</title>
+		<link rel="stylesheet" type="text/css" href="../../styles/ddox.css"/>
+		<link rel="stylesheet" href="../../prettify/prettify.css" type="text/css"/>
+		<script type="text/javascript" src="../../scripts/jquery.js">/**/</script><script type="text/javascript" src="../../scripts/ddox.js">/**/</script>
+	</head>
+	<body onload="setupDdox();">
+		<nav id="main-nav">
+			<noscript>
+				<p style="color: red">The search functionality needs JavaScript enabled</p>
+			</noscript>
+			<div id="symbolSearchPane" style="display: none">
+				<form action="#" method="GET">
+					<input id="symbolSearch" type="text" name="q" placeholder="Search for symbols" autocomplete="off" onchange="performSymbolSearch(40);" onkeypress="this.onchange();" onpaste="this.onchange();" oninput="this.onchange();"/>
+				</form>
+				<ul id="symbolSearchResults" class="symbolList" style="display: none"></ul><script type="application/javascript" src="../../symbols.js"></script><script type="application/javascript">var symbolSearchRootDir = "../../";
+$('#symbolSearchPane').show();</script>
+			</div>
+			<ul class="tree-view">
+				<li class="tree-view ">
+					<div class="package ">monadic
+					</div>
+			<ul class="tree-view">
+				<li>
+					<div class="module ">
+						<a href="../../monadic/json.html">json</a>
+					</div>
+				</li>
+				<li>
+					<div class="module selected">
+						<a href="../../monadic/option.html">option</a>
+					</div>
+				</li>
+			</ul>
+				</li>
+			</ul>
+		</nav>
+		<div id="main-contents">
+			<h1>Function Option.unwrap</h1><p>Takes a value out of Some and casts it into a T type. Raises CannotUnwrapNone
+ exception if called on None.
+</p>
+			<div class="prototype">
+				<code class="lang-d">
+					<div class="single-prototype">
+			<span class="pln">T</span> <span class="pln">unwrap</span>(T)<span class="pun">(</span><span class="pun">)</span><span class="pun">;</span>
+					</div>
+				</code>
+			</div>
+			
+			<section><h2>Returns</h2>
+<p>value of type T
+</p>
+</section>
+<section><h2>Throws</h2>
+<p>CannotUnwrapNone if called on None, VariantException if cannot be casted to T
+</p>
+</section>
+<section><h2>Example</h2>
+<p>Takes a value out of Some. If it's impossible to cast, returns defaultValue.
+ Always returns defaultValue for None
+</p>
+</section>
+<section><h2>Returns</h2>
+<p>value of type T
+</p>
+<pre class="code"><code class="lang-d"><span class="kwd">auto </span><span class="pln">someInt </span><span class="pun">= <a href="../../monadic/option/Some.html"></span><span class="typ">Some</span></a><span class="pun">(</span><span class="lit">13</span><span class="pun">);
+</span><span class="kwd">assert</span><span class="pun">(</span><span class="pln">someInt<wbr/></span><span class="pun">.</span><span class="pln">unwrap</span><span class="pun">!</span><span class="typ">int </span><span class="pun">== </span><span class="lit">13</span><span class="pun">);
+</span><span class="kwd">assert</span><span class="pun">(</span><span class="pln">someInt<wbr/></span><span class="pun">.</span><span class="pln">unwrap</span><span class="pun">!</span><span class="typ">long </span><span class="pun">== </span><span class="lit">13</span><span class="pun">);
+</span><span class="kwd">assert</span><span class="pun">(</span><span class="pln">someInt<wbr/></span><span class="pun">.</span><span class="pln">unwrap</span><span class="pun">!</span><span class="typ">double </span><span class="pun">== </span><span class="lit">13.0</span><span class="pun">);
+
+</span></code></pre>
+</section>
+<section><h2>Example</h2>
+
+<pre class="code"><code class="lang-d"><span class="kwd">import </span><span class="pln">std<wbr/></span><span class="pun">.</span><span class="pln">exception </span><span class="pun">: </span><span class="pln">assertThrown</span><span class="pun">;
+</span><span class="kwd">import </span><span class="pln">std<wbr/></span><span class="pun">.</span><span class="pln">variant </span><span class="pun">: </span><span class="typ">VariantException</span><span class="pun">;
+
+</span><span class="kwd">auto </span><span class="pln">someStr </span><span class="pun">= <a href="../../monadic/option/Some.html"></span><span class="typ">Some</span></a><span class="pun">(</span><span class="str">"abc"</span><span class="pun">);
+</span><span class="pln">assertThrown</span><span class="pun">!</span><span class="typ">VariantException</span><span class="pun">(</span><span class="pln">someStr<wbr/></span><span class="pun">.</span><span class="pln">unwrap</span><span class="pun">!</span><span class="typ">int</span><span class="pun">());
+
+</span></code></pre>
+</section>
+<section><h2>Example</h2>
+
+<pre class="code"><code class="lang-d"><span class="kwd">import </span><span class="pln">std<wbr/></span><span class="pun">.</span><span class="pln">exception </span><span class="pun">: </span><span class="pln">assertThrown</span><span class="pun">;
+
+</span><span class="kwd">auto </span><span class="pln">none </span><span class="pun">= <a href="../../monadic/option/None.html"></span><span class="typ">None</span></a><span class="pun">();
+</span><span class="pln">assertThrown</span><span class="pun">!<a href="../../monadic/option/CannotUnwrapNone.html"></span><span class="typ">CannotUnwrapNone</span></a><span class="pun">(</span><span class="pln">none<wbr/></span><span class="pun">.</span><span class="pln">unwrap</span><span class="pun">!</span><span class="typ">int</span><span class="pun">());
+
+</span></code></pre>
+</section>
+
+			<footer>
+				<table class="license-info">
+					<tr>
+						<th>Authors</th>
+						<td>
+							
+						</td>
+					</tr>
+					<tr>
+						<th>Copyright</th>
+						<td>
+							
+						</td>
+					</tr>
+					<tr>
+						<th>License</th>
+						<td>
+							
+						</td>
+					</tr>
+				</table>
+				<p class="faint">Generated using the DDOX documentation generator</p>
+			</footer>
+		</div>
+	</body>
+</html>

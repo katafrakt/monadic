@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<url><loc>http://127.0.0.1/index.html</loc></url>
+<url><loc>http://127.0.0.1/monadic/json.html</loc></url>
+<url><loc>http://127.0.0.1/monadic/json/MonadicJSON.html</loc></url>
+<url><loc>http://127.0.0.1/monadic/json/MonadicJSON.dig.html</loc></url>
+<url><loc>http://127.0.0.1/monadic/json/MonadicJSON.digWithCast.html</loc></url>
+<url><loc>http://127.0.0.1/monadic/option.html</loc></url>
+<url><loc>http://127.0.0.1/monadic/option/CannotUnwrapNone.html</loc></url>
+<url><loc>http://127.0.0.1/monadic/option/None.html</loc></url>
+<url><loc>http://127.0.0.1/monadic/option/Option.isNone.html</loc></url>
+<url><loc>http://127.0.0.1/monadic/option/Option.map.html</loc></url>
+<url><loc>http://127.0.0.1/monadic/option/Option.opCall.html</loc></url>
+<url><loc>http://127.0.0.1/monadic/option/Option.opEquals.html</loc></url>
+<url><loc>http://127.0.0.1/monadic/option/Option.unwrap.html</loc></url>
+<url><loc>http://127.0.0.1/monadic/option/Option.unwrapOr.html</loc></url>
+<url><loc>http://127.0.0.1/monadic/option/Option.html</loc></url>
+<url><loc>http://127.0.0.1/monadic/option/Option.isNone.html</loc></url>
+<url><loc>http://127.0.0.1/monadic/option/Option.map.html</loc></url>
+<url><loc>http://127.0.0.1/monadic/option/Option.opCall.html</loc></url>
+<url><loc>http://127.0.0.1/monadic/option/Option.opEquals.html</loc></url>
+<url><loc>http://127.0.0.1/monadic/option/Option.unwrap.html</loc></url>
+<url><loc>http://127.0.0.1/monadic/option/Option.unwrapOr.html</loc></url>
+<url><loc>http://127.0.0.1/monadic/option/Some.html</loc></url>
+<url><loc>http://127.0.0.1/monadic/option/Option.isNone.html</loc></url>
+<url><loc>http://127.0.0.1/monadic/option/Option.map.html</loc></url>
+<url><loc>http://127.0.0.1/monadic/option/Option.opCall.html</loc></url>
+<url><loc>http://127.0.0.1/monadic/option/Option.opEquals.html</loc></url>
+<url><loc>http://127.0.0.1/monadic/option/Option.unwrap.html</loc></url>
+<url><loc>http://127.0.0.1/monadic/option/Option.unwrapOr.html</loc></url>
+</urlset>
