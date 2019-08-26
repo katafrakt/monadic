@@ -1,0 +1,15 @@
+.dub
+docs.json
+__dummy.html
+docs/
+/monadic
+monadic.so
+monadic.dylib
+monadic.dll
+monadic.a
+monadic.lib
+monadic-test-*
+*.exe
+*.o
+*.obj
+*.lst

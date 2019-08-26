@@ -1,0 +1,7 @@
+name "monadic"
+description "Monads for D"
+authors "katafrakt"
+copyright "Copyright © 2019, katafrakt"
+license "MIT"
+
+dependency "silly" version="~>0.8.2"
