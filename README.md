@@ -1,5 +1,7 @@
 # Monadic
 
+API docs: https://katafrakt.github.io/monadic/
+
 The goal of this repository if to probide a set of modules to work with common monads. It is based partly on [Rust](https://www.rust-lang.org) programming language, and partly on [dry-monads](https://dry-rb.org/gems/dry-monads/) for Ruby. So far it includes:
 
 **Monads:**
@@ -14,6 +16,8 @@ The goal of this repository if to probide a set of modules to work with common m
 
 ### Option
 
+API docs: https://katafrakt.github.io/monadic/monadic/option.html
+
 ```d
 auto some = Some(4);
 auto doubleMe = (int x) => x * 2;
@@ -25,6 +29,8 @@ assert(result.unwrap!int() == 8);
 ## Wrappers
 
 ### JSON
+
+API docs: https://katafrakt.github.io/monadic/monadic/json.html
 
 This is a wrapper on `std.json` to make querying JSONs easier. It is designed for programmers comfort, not for performance, and you should use it on schemaless JSONs. If you know the structure and want to map it into a `struct`, use `asdf`.
 
