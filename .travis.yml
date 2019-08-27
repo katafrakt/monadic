@@ -5,8 +5,17 @@ d:
   - ldc
   - gdc
 
+before_deploy:
+  - dub build -b ddox
+
+matrix:
+  allow_failures:
+  - d: ldc
+  - d: gdc
+
 deploy:
   provider: pages
+  local_dir: docs
   skip_cleanup: true
   github_token: $GITHUB_TOKEN  # Set in the settings page of your repository, as a secure variable
   keep_history: true
