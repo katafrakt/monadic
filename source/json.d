@@ -201,7 +201,7 @@ class MonadicJSON {
     return !!(key in this.json);
   }
 
-  private Some unjson(JSONValue jv) {
+  private Option unjson(JSONValue jv) {
     switch(jv.type()) {
       case JSONType.string:
         return Some(jv.str);

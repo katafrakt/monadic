@@ -10,7 +10,10 @@ import std.variant;
 /***********************************
  * Interface over Some and None.
  */
-interface Option {
+class Option {
+  Variant value;
+  bool is_some;
+
   /** Wraps a value in an Option. If the value is null, returns None. Otherwise returns Some(value)
   * Returns: None or Some(value)
   */
@@ -25,15 +28,24 @@ interface Option {
   /// Wraping a value
   unittest {
     auto some = Option(1);
-    assert(is(typeof(some) == Some));
     assert(!some.isNone());
   }
 
   /// Wrapping null
   unittest {
     auto some = Option(null);
-    assert(is(typeof(some) == None));
     assert(some.isNone());
+  }
+
+  /** Constructor for Option having a value (Some) */
+  this(T)(T value) {
+    this.value = value;
+    this.is_some = true;
+  }
+
+  /** Constructor for Option without a value (None) */
+  this() {
+    this.is_some = false;
   }
 
   /** Checks if object is None.
@@ -45,7 +57,9 @@ interface Option {
   * Some(15).isNone() // => false
   * ---
   */
-  bool isNone();
+  bool isNone() {
+    return !this.is_some;
+  }
 
   unittest {
     auto some = Some(1);
@@ -63,9 +77,11 @@ interface Option {
    * Throws: CannotUnwrapNone if called on None, VariantException if cannot be casted to T
   */
   T unwrap(T)() {
-    if(cast(Some) this) { return (cast(Some) this).unwrap!T(); }
-    if(cast(None) this) { return (cast(None) this).unwrap!T(); }
-    throw new Exception("Unknown subclass - do not implement Option in your own classes!");
+    if(this.is_some) {
+      return this.value.get!(T);
+    } else {
+      throw new CannotUnwrapNone;
+    }
   }
 
   /** Takes a value out of Some. If it's impossible to cast, returns defaultValue.
@@ -112,8 +128,15 @@ interface Option {
   * Returns: value of type T
   */
   auto unwrapOr(T)(T defaultValue) {
-    if(cast(Some) this) { return (cast(Some) this).unwrapOr!T(defaultValue); }
-    return (cast(None) this).unwrapOr!T(defaultValue);
+    if(this.is_some) {
+      if(this.value.convertsTo!(T)) {
+        return this.unwrap!T();
+      } else {
+        return defaultValue;
+      }
+    } else {
+      return defaultValue;
+    }
   }
 
   ///
@@ -146,9 +169,13 @@ interface Option {
   * Returns: Option
   */
   Option map(alias fun)() {
-    if(cast(Some) this) { return (cast(Some) this).map!fun; }
-    if(cast(None) this) { return (cast(None) this).map!fun; }
-    throw new Exception("Unknown subclass - do not implement Option in your own classes!");
+    if(this.is_some) {
+      import std.traits : Parameters;
+      auto value = this.value.get!(Parameters!fun[0]);
+      return Some(fun(value));
+    } else {
+      return this;
+    }
   }
 
   /// map on Some
@@ -177,9 +204,13 @@ interface Option {
   }
 
   Option flatmap(alias fun)() {
-    if(cast(Some) this) { return (cast(Some) this).flatmap!fun; }
-    if(cast(None) this) { return None(); }
-    throw new Exception("Unknown subclass - do not implement Option in your own classes!");
+    if(this.is_some) {
+      import std.traits : Parameters;
+      auto value = this.value.get!(Parameters!fun[0]);
+      return fun(value);
+    } else {
+      return this;
+    }
   }
 
   /** Equality on Option.
@@ -187,7 +218,15 @@ interface Option {
   * Some is equal when its value is equal.
   * Returns: bool
   */
-  bool opEquals(Object o);
+  override bool opEquals(Object o) {
+    if(this.is_some) {
+      auto some = cast(Option) o;
+      if(some is null) { return false; }
+      return this.value == some.value;
+    } else {
+      return false;
+    }
+  }
 
   ///
   unittest {
@@ -207,48 +246,8 @@ interface Option {
 /** Represents an Option having a value (sometimes know as Just)
 */
 class Some : Option {
-  Variant value;
-
-  this(T)(T value) {
-    this.value = value;
-  }
-
-  static Some opCall(T)(T value) {
-    return new Some(value);
-  }
-
-  bool isNone() {
-    return false;
-  }
-
-  T unwrap(T)() {
-    return this.value.get!(T);
-  }
-
-  auto unwrapOr(T)(T defaultValue) {
-    if(this.value.convertsTo!(T)) {
-      return this.unwrap!T();
-    } else {
-      return defaultValue;
-    }
-  }
-
-  override bool opEquals(Object o) {
-    auto some = cast(Some) o;
-    if(some is null) { return false; }
-    return this.value == some.value;
-  }
-
-  auto map(alias fun)() {
-    import std.traits : Parameters;
-    auto value = this.value.get!(Parameters!fun[0]);
-    return Some(fun(value));
-  }
-
-  Option flatmap(alias fun)() {
-    import std.traits : Parameters;
-    auto value = this.value.get!(Parameters!fun[0]);
-    return fun(value);
+  static Option opCall(T)(T value) {
+    return new Option(value);
   }
 
   override string toString() {
@@ -267,28 +266,8 @@ class CannotUnwrapNone : Exception {
 /** Represents Option without value
 */
 class None : Option {
-  static None opCall() {
-    return new None();
-  }
-
-  bool isNone() {
-    return true;
-  }
-
-  T unwrap(T)() {
-    throw new CannotUnwrapNone;
-  }
-
-  auto unwrapOr(T)(T defaultValue) {
-    return defaultValue;
-  }
-
-  override bool opEquals(Object _x) {
-    return false;
-  }
-
-  auto map(alias _fun)() {
-    return this;
+  static Option opCall() {
+    return new Option();
   }
 }
 
