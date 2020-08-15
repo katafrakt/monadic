@@ -4,4 +4,4 @@ authors "katafrakt"
 copyright "Copyright © 2019, katafrakt"
 license "MIT"
 
-dependency "silly" version="~>0.8.2"
+dependency "silly" version="~>1.0.2"
