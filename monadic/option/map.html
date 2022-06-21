@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8"/>
-		<title>Function Option.map</title>
+		<title>Function map</title>
 		<link rel="stylesheet" type="text/css" href="../../styles/ddox.css"/>
 		<link rel="stylesheet" href="../../prettify/prettify.css" type="text/css"/>
 		<script type="text/javascript" src="../../scripts/jquery.js">/**/</script><script type="text/javascript" src="../../scripts/ddox.js">/**/</script>
@@ -39,14 +39,19 @@ $('#symbolSearchPane').show();</script>
 			</ul>
 		</nav>
 		<div id="main-contents">
-			<h1>Function Option.map</h1><p>Calls fun on value of Some or returns self if called on None.
+			<h1>Function map</h1><p>Calls fun on value of Some or returns self if called on None.
  This is used to create chains of transformations, which might be stopped at any point
  when None is returned.
 </p>
 			<div class="prototype">
 				<code class="lang-d">
 					<div class="single-prototype">
-			<a href="../../monadic/option/Option.html"><span class="typ">Option</span></a> <span class="pln">map</span>(alias fun)<span class="pun">(</span><span class="pun">)</span><span class="pun">;</span>
+			<span class="typ">Option</span> <span class="pln">map</span>(alias fun)
+			<span class="pun">(</span>
+			<br/>
+			&nbsp;&nbsp;<span class="typ">Option</span> <span class="pln">option</span>
+			<br/>
+			<span class="pun">)</span><span class="pun">;</span>
 					</div>
 				</code>
 			</div>
@@ -58,32 +63,31 @@ $('#symbolSearchPane').show();</script>
 <section><h2>Example</h2>
 <p>map on Some
 </p>
-<pre class="code"><code class="lang-d"><span class="kwd">auto </span><span class="pln">some </span><span class="pun">= <a href="../../monadic/option/Some.html"></span><span class="typ">Some</span></a><span class="pun">(</span><span class="lit">4</span><span class="pun">);
+<pre class="code"><code class="lang-d"><span class="kwd">auto </span><span class="pln">some </span><span class="pun">= </span><span class="typ">Some</span><span class="pun">(</span><span class="lit">4</span><span class="pun">);
 </span><span class="kwd">auto </span><span class="pln">doubleMe </span><span class="pun">= (</span><span class="typ">int </span><span class="pln">x</span><span class="pun">) =&gt; </span><span class="pln">x </span><span class="pun">* </span><span class="lit">2</span><span class="pun">;
-</span><span class="kwd">auto </span><span class="pln">result </span><span class="pun">= </span><span class="pln">some<wbr/></span><span class="pun">.</span><span class="pln">map</span><span class="pun">!</span><span class="pln">doubleMe</span><span class="pun">;
+</span><span class="kwd">auto </span><span class="pln">decrement </span><span class="pun">= (</span><span class="typ">int </span><span class="pln">x</span><span class="pun">) =&gt; </span><span class="pln">x </span><span class="pun">- </span><span class="lit">1</span><span class="pun">;
+</span><span class="kwd">auto </span><span class="pln">result </span><span class="pun">= </span><span class="pln">some<wbr/></span><span class="pun">.</span><span class="pln">map</span><span class="pun">!(</span><span class="pln">doubleMe</span><span class="pun">)<wbr/>.</span><span class="pln">map</span><span class="pun">!(</span><span class="pln">decrement</span><span class="pun">);
 </span><span class="kwd">assert</span><span class="pun">(!</span><span class="pln">result<wbr/></span><span class="pun">.</span><span class="pln">isNone</span><span class="pun">());
-</span><span class="kwd">assert</span><span class="pun">(</span><span class="pln">result<wbr/></span><span class="pun">.</span><span class="pln">unwrap</span><span class="pun">!</span><span class="typ">int</span><span class="pun">() == </span><span class="lit">8</span><span class="pun">);
-
+</span><span class="kwd">assert</span><span class="pun">(</span><span class="pln">result<wbr/></span><span class="pun">.</span><span class="pln">unwrap</span><span class="pun">!</span><span class="typ">int</span><span class="pun">() == </span><span class="lit">7</span><span class="pun">);
 </span></code></pre>
 </section>
 <section><h2>Example</h2>
 <p>map with lambda
 </p>
-<pre class="code"><code class="lang-d"><span class="kwd">auto </span><span class="pln">some </span><span class="pun">= <a href="../../monadic/option/Some.html"></span><span class="typ">Some</span></a><span class="pun">(</span><span class="lit">4</span><span class="pun">);
+<pre class="code"><code class="lang-d"><span class="kwd">auto </span><span class="pln">some </span><span class="pun">= </span><span class="typ">Some</span><span class="pun">(</span><span class="lit">4</span><span class="pun">);
 </span><span class="kwd">auto </span><span class="pln">result </span><span class="pun">= </span><span class="pln">some<wbr/></span><span class="pun">.</span><span class="pln">map</span><span class="pun">!((</span><span class="typ">int </span><span class="pln">a</span><span class="pun">) =&gt; </span><span class="pln">a </span><span class="pun">* </span><span class="lit">3</span><span class="pun">);
 </span><span class="kwd">assert</span><span class="pun">(!</span><span class="pln">result<wbr/></span><span class="pun">.</span><span class="pln">isNone</span><span class="pun">());
 </span><span class="kwd">assert</span><span class="pun">(</span><span class="pln">result<wbr/></span><span class="pun">.</span><span class="pln">unwrap</span><span class="pun">!</span><span class="typ">int</span><span class="pun">() == </span><span class="lit">12</span><span class="pun">);
-
 </span></code></pre>
 </section>
 <section><h2>Example</h2>
 <p>map on None
 </p>
-<pre class="code"><code class="lang-d"><span class="kwd">auto </span><span class="pln">none </span><span class="pun">= <a href="../../monadic/option/None.html"></span><span class="typ">None</span></a><span class="pun">();
+<pre class="code"><code class="lang-d"><span class="kwd">auto </span><span class="pln">none </span><span class="pun">= </span><span class="typ">None</span><span class="pun">();
 </span><span class="kwd">auto </span><span class="pln">doubleMe </span><span class="pun">= (</span><span class="typ">int </span><span class="pln">x</span><span class="pun">) =&gt; </span><span class="pln">x </span><span class="pun">* </span><span class="lit">2</span><span class="pun">;
-</span><span class="kwd">auto </span><span class="pln">result </span><span class="pun">= </span><span class="pln">none<wbr/></span><span class="pun">.</span><span class="pln">map</span><span class="pun">!</span><span class="pln">doubleMe</span><span class="pun">;
+</span><span class="kwd">auto </span><span class="pln">decrement </span><span class="pun">= (</span><span class="typ">int </span><span class="pln">x</span><span class="pun">) =&gt; </span><span class="pln">x </span><span class="pun">- </span><span class="lit">1</span><span class="pun">;
+</span><span class="kwd">auto </span><span class="pln">result </span><span class="pun">= </span><span class="pln">none<wbr/></span><span class="pun">.</span><span class="pln">map</span><span class="pun">!(</span><span class="pln">doubleMe</span><span class="pun">)<wbr/>.</span><span class="pln">map</span><span class="pun">!(</span><span class="pln">decrement</span><span class="pun">);
 </span><span class="kwd">assert</span><span class="pun">(</span><span class="pln">result<wbr/></span><span class="pun">.</span><span class="pln">isNone</span><span class="pun">());
-
 </span></code></pre>
 </section>
 

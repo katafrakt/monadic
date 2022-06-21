@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8"/>
-		<title>Function Option.unwrapOr</title>
+		<title>Function isSome</title>
 		<link rel="stylesheet" type="text/css" href="../../styles/ddox.css"/>
 		<link rel="stylesheet" href="../../prettify/prettify.css" type="text/css"/>
 		<script type="text/javascript" src="../../scripts/jquery.js">/**/</script><script type="text/javascript" src="../../scripts/ddox.js">/**/</script>
@@ -39,39 +39,29 @@ $('#symbolSearchPane').show();</script>
 			</ul>
 		</nav>
 		<div id="main-contents">
-			<h1>Function Option.unwrapOr</h1><p>Same as unwrap, but returns defaultValue if unwrap is not possible (called on None or type mismatch).
+			<h1>Function isSome</h1><p>Checks if object is None.
 </p>
 			<div class="prototype">
 				<code class="lang-d">
 					<div class="single-prototype">
-			<span class="kwd">auto</span> <span class="pln">unwrapOr</span>(T)
+			<span class="typ">bool</span> <span class="pln">isSome</span>
 			<span class="pun">(</span>
 			<br/>
-			&nbsp;&nbsp;<span class="pln">T</span> <span class="pln">defaultValue</span>
+			&nbsp;&nbsp;<span class="pln">std<wbr/></span><span class="pun">.</span><span class="pln">sumtype<wbr/></span><span class="pun">.</span><span class="typ">SumType</span>!(monadic.option.Some,monadic.option.None) <span class="pln">option</span>
 			<br/>
 			<span class="pun">)</span><span class="pun">;</span>
 					</div>
 				</code>
 			</div>
-			
+			<section></section>
+
 			<section><h2>Returns</h2>
-<p>value of type T
+<p>bool
 </p>
 </section>
 <section><h2>Example</h2>
-
-<pre class="code"><code class="lang-d"><span class="kwd">auto </span><span class="pln">someInt </span><span class="pun">= <a href="../../monadic/option/Some.html"></span><span class="typ">Some</span></a><span class="pun">(</span><span class="lit">42</span><span class="pun">);
-</span><span class="kwd">assert</span><span class="pun">(</span><span class="pln">someInt<wbr/></span><span class="pun">.</span><span class="pln">unwrapOr</span><span class="pun">!</span><span class="typ">string</span><span class="pun">(</span><span class="str">"abc"</span><span class="pun">) == </span><span class="str">"abc"</span><span class="pun">);
-</span><span class="kwd">assert</span><span class="pun">(</span><span class="pln">someInt<wbr/></span><span class="pun">.</span><span class="pln">unwrapOr</span><span class="pun">!</span><span class="typ">int</span><span class="pun">(</span><span class="lit">15</span><span class="pun">) == </span><span class="lit">42</span><span class="pun">);
-
-</span></code></pre>
-</section>
-<section><h2>Example</h2>
-
-<pre class="code"><code class="lang-d"><span class="kwd">auto </span><span class="pln">none </span><span class="pun">= <a href="../../monadic/option/None.html"></span><span class="typ">None</span></a><span class="pun">();
-</span><span class="kwd">assert</span><span class="pun">(</span><span class="pln">none<wbr/></span><span class="pun">.</span><span class="pln">unwrapOr</span><span class="pun">!</span><span class="typ">int</span><span class="pun">(</span><span class="lit">15</span><span class="pun">) == </span><span class="lit">15</span><span class="pun">);
-
-</span></code></pre>
+<pre class="code"><code class="lang-d"><span class="typ">None</span><span class="pun">()<a href="../../monadic/option/isNone.html"></span><wbr/><span class="pun">.</span><span class="pln">isNone</span></a><span class="pun">()   </span><span class="com">// =&gt; true
+</span><span class="typ">Some</span><span class="pun">(</span><span class="lit">15</span><span class="pun">)<a href="../../monadic/option/isNone.html"></span><wbr/><span class="pun">.</span><span class="pln">isNone</span></a><span class="pun">() </span><span class="com">// =&gt; false</span></code></pre>
 </section>
 
 			<footer>
