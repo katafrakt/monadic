@@ -182,9 +182,9 @@ class MonadicJSON {
 
   private Option digElem(int elem, JSONValue jv) {
     if(jv.type() == JSONType.array && elem >= 0 && elem < jv.array.length) {
-      return cast(Option) Some(jv.array[elem]);
+      return Some(jv.array[elem]);
     }
-    return cast(Option) None();
+    return None();
   }
 
   private Option digElem(string elem, JSONValue jv) {
@@ -192,16 +192,16 @@ class MonadicJSON {
     if(jv.type() != JSONType.object) return None();
 
     if(elem in jv) {
-      return cast(Option) Some(jv[elem]);
+      return Some(jv[elem]);
     }
-    return cast(Option) None();
+    return None();
   }
 
   private bool hasKey(string key) {
     return !!(key in this.json);
   }
 
-  private Some unjson(JSONValue jv) {
+  private Option unjson(JSONValue jv) {
     switch(jv.type()) {
       case JSONType.string:
         return Some(jv.str);
