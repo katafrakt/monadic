@@ -152,13 +152,13 @@ unittest {
   assert(none.isNone() == true);
 }
 
-/** Checks if object is None.
+/** Checks if object is Some.
 
 * Returns: bool
 * Example:
 * ---
-* None().isNone()   // => true
-* Some(15).isNone() // => false
+* None().isNone()   // => false
+* Some(15).isNone() // => true
 * ---
 */
 bool isSome(Option option) {
